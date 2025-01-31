@@ -124,14 +124,14 @@ ufw allow "Nginx Full"
 
 #### First configuration
 ```
- nano /etc/nginx/sites-available/netflix
+ nano /etc/nginx/sites-available/your_project
 ```
 ```
 server {
   listen 80;
 
   location / {
-        root /var/www/netflix;
+        root /var/www/your_project;
         index  index.html index.htm;
         proxy_http_version 1.1;
         proxy_set_header Upgrade $http_upgrade;
@@ -145,13 +145,13 @@ server {
 ```
 
 ```
-ln -s /etc/nginx/sites-available/netflix /etc/nginx/sites-enabled/netflix
+ln -s /etc/nginx/sites-available/your_project /etc/nginx/sites-enabled/your_project
 
 ```
 
 ##### Write your fist message
 ```
-nano /var/www/netflix/index.html
+nano /var/www/your_project/index.html
 
 ```
 
@@ -168,10 +168,10 @@ apt install git
 ```
 
 ```
-mkdir netflix
+mkdir your_project
 ```
 ```
-cd netflix
+cd your_project
 ```
 
 ```
@@ -180,7 +180,7 @@ git clone <your repository>
 
 ## Nginx Configuration for new apps
 ```
-nano /etc/nginx/sites-available/netflix
+nano /etc/nginx/sites-available/your_project
 ```
 ```
 location /api {
@@ -253,20 +253,20 @@ npm run build
 Right now, we should move this build file into the main web file
 
 ```
-rm -rf /var/www/netflix/*
+rm -rf /var/www/your_project/*
 ```
 ```
-mkdir /var/www/netflix/client
+mkdir /var/www/your_project/client
 ```
 
 ```
-cp -r build/* /var/www/netflix/client
+cp -r build/* /var/www/your_project/client
 ```
 
 Let's make some server configuration
 ```
  location / {
-        root /var/www/netflix/client/;
+        root /var/www/your_project/client/;
         index  index.html index.htm;
         proxy_http_version 1.1;
         proxy_set_header Upgrade $http_upgrade;
@@ -288,10 +288,10 @@ Let's make some server configuration
 ```
 server {
  listen 80;
- server_name safakkocaoglu.com www.safakkocaoglu.com;
+ server_name example.com www.example.com;
 
 location / {
- root /var/www/netflix/client;
+ root /var/www/your_project/client;
  index  index.html index.htm;
  proxy_http_version 1.1;
  proxy_set_header Upgrade $http_upgrade;
@@ -304,7 +304,7 @@ location / {
 
 server {
   listen 80;
-  server_name api.safakkocaoglu.com;
+  server_name api.example.com;
   location / {
     proxy_pass http://45.90.108.107:8800;
     proxy_http_version 1.1;
@@ -317,7 +317,7 @@ server {
 
 server {
   listen 80;
-  server_name admin.safakkocaoglu.com;
+  server_name admin.example.com;
   location / {
     root /var/www/netflix/admin;
     index  index.html index.htm;
